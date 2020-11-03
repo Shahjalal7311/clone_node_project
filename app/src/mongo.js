@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-export const uri = "mongodb://localhost:27017/parcelkoi";
+export const uri = "mongodb://localhost:27017/node_practice";
 const options = {};
 
 
