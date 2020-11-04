@@ -4,6 +4,7 @@ import { handleRequest, handleError } from "./middlewares/index";
 import { infoLogger } from "./logger";
 import dotenv from "dotenv";
 const swaggerUi = require('swagger-ui-express');
+const swaggerJsdoc = require('swagger-jsdoc');
 
 dotenv.config();
 

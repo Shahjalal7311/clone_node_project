@@ -1,10 +1,10 @@
 import express from "express";
 import { saveUser, getAllUsers, update, deleteById, getUserById } from "../services/userService";
-import validators from "../models/view-models";
+import validators from "../models/request-models";
 import { handleValidation } from "../middlewares";
 import { NotFound } from '../utils/errors';
 
-const router = express.Router();
+let router = express.Router();
 
 const getHandler = async (req, res, next) => {
     try {
@@ -60,14 +60,17 @@ const deleteHandler = async (req, res, next) => {
     }
 }
 
+/**
+ * @swagger
+ * /users:
+ *    get:
+ *      description: This should return all users
+ */
+
 router.get('/', getHandler);
 router.get('/:id', getByIdHandler);
 router.post('/', handleValidation(validators.userSchemaValidate), postHandler);
 router.put('/', putHandler);
 router.delete('/:id', deleteHandler);
 
-const configure = (app) => {
-    app.use('/users', router);
-}
-
-export default configure;
+export default router;
