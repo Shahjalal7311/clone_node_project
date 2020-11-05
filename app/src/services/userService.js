@@ -21,6 +21,7 @@ export const update = async (user) => {
     let model = await User.findById(id);
     if (model) {
         model.username = user.username;
+        model.email = user.email;
         model.save();
         return model;
     }

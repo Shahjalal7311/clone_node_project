@@ -148,13 +148,19 @@
     "definitions": {
         "User": {
             "required": [
-                "username"
+                "username",
+                "email"
             ],
             "properties": {
                 "username": {
                     "type": "string",
                     "pattern": "^[a-zA-Z0-9]*$",
                     "minLength": 3,
+                    "maxLength": 30
+                },
+                "email": {
+                    "type": "string",
+                    "minLength": 15,
                     "maxLength": 30
                 }
             }
@@ -171,6 +177,12 @@
                     "type": "string",
                     "examples": [
                         "u001"
+                    ]
+                },
+                "email": {
+                    "type": "string",
+                    "examples": [
+                        "example@gmail.com"
                     ]
                 },
                 "createdAt": {
