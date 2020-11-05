@@ -1,0 +1,56 @@
+version: "3.8"
+services: 
+  mongo:
+    image: mongo
+    container_name: mongo
+    ports: 
+      - "27017:27017" #whatever port we are using
+    networks: 
+      - nodepractice-net
+    volumes: 
+      - mongo_data:/data/db
+  elasticsearch:
+    image: elasticsearch:7.9.2
+    container_name: elasticsearch
+    environment: 
+      - discovery.type=single-node
+    ports: 
+      - "9200:9200"
+    networks: 
+      - nodepractice-net
+    volumes: 
+      - elasticsearch_data:/usr/share/elasticsearch/data
+  kibana:
+    image: kibana:7.9.2
+    container_name: kibana
+    ports: 
+      - "5601:5601"
+    networks: 
+      - nodepractice-net
+    volumes: 
+      - kibana_data:/usr/share/kibana/data
+  nodepractice:
+    image: nodepractice
+    container_name: nodepractice
+    ports: 
+      - "3000:3000"
+    networks: 
+      - nodepractice-net
+    volumes: 
+      - nodepractice_data:/usr/share/clone_node_project/data
+    environment: 
+      - DEBUG=1
+      - MONGODB_HOST=mongo
+      - ELASTICSEARCH_HOST=elasticsearch
+    depends_on: 
+      - mongo
+      - elasticsearch
+      - kibana
+networks: 
+  nodepractice-net:
+    driver: bridge
+volumes: 
+  mongo_data:
+  elasticsearch_data:
+  kibana_data:
+  nodepractice_data:

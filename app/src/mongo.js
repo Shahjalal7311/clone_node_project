@@ -1,8 +1,9 @@
 import mongoose from "mongoose";
 
-export const uri = "mongodb://localhost:27017/node_practice";
+console.log('process.env.MONGODB_HOST: ', process.env.MONGODB_HOST);
+let host = process.env.MONGODB_HOST || "localhost";
+export const uri = `mongodb://${host}:27017/node_practice`;
 const options = {};
-
 
 const log = (msg) => console.log(msg);
 
